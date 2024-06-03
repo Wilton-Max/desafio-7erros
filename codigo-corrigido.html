@@ -32,11 +32,11 @@
 
     // Função para exibir a lista de desenhos animados
     function exibirLista() {
-        const lista = document.getElementById('lista-desenhos'); 
+        const lista = document.getElementById('lista-desenhos'); // ERRO 3 -- AQUI DEVERIA PEGAR O ELEMENTO PELO ID, NÃO PELA CASSE
         lista.innerHTML = ''; // Limpa a lista antes de preenchê-la novamente
 
         desenhosAnimados.forEach(desenho => {
-            const item = document.createElement('li'); // Erro 3 -- FALTOU AS ASPAS EM 'li'
+            const item = document.createElement('li'); // Erro 4 -- FALTOU AS ASPAS EM 'li'
             item.textContent = desenho;
             lista.appendChild(item);
         });
@@ -44,16 +44,17 @@
 
      // Função para adicionar um novo desenho
      function adicionarDesenho() {
-        const novoDesenho = document.getElementById("novo-desenho").value; // Erro 4 -- AQUI ADCIONEI O ".VALUE" PARA PEGAR O VALOR DA STRING, E NÃO APENAS O ELEMENTO.
-        if (novoDesenho.trim() !== '') { 
-            desenhosAnimados.push(novoDesenho); // ERRO 5 -- TROQUEI O CODIGO E ADCIONEI ".push". PARA QUE SEJA ADCIONADO O NOVO DESENHO.
-            exibirLista(); // ERRO 6 -- FALTOU CHAMAR A FUNÇÃO CORRETAMENTE, USANDO OS PARENTESES.
-            document.getElementById("novo-desenho").value = ''; // Limpa o input
+        const novoDesenho = document.getElementById("novo-desenho").value; // Erro 5 -- AQUI ADCIONEI O ".VALUE" PARA PEGAR O VALOR DA STRING, E NÃO APENAS O ELEMENTO.
+        if (novoDesenho.trim() !== '') {
+        desenhosAnimados[indiceSubstituicao] = novoDesenho; // Substitui o elemento no índice atual
+        indiceSubstituicao = (indiceSubstituicao + 1) % desenhosAnimados.length; // Atualiza o índice para a próxima substituição
+        exibirLista(); // ERRO 6 -- FALTOU CHAMAR A FUNÇÃO CORRETAMENTE, USANDO OS PARENTESES.
+        document.getElementById("novo-desenho").value = ''; // Limpa o input
         }
     }
 
     // Exibe a lista inicial quando a página carrega
-    window.onload = exibirLista(); //ERRO 7 -- AQUI DEVERIA RECEBER A FUNÇAO EXIBIR LISTA
+    window.onload = exibirLista; //ERRO 7 -- PARA A LISTA INICIAL SER CARREGADA, ONLOAD, PRESCISA RECEBER A FUNÇÃO 'exibirLista'
     </script>
 </body>
 </html>
